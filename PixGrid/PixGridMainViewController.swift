@@ -77,6 +77,8 @@ class PixGridMainViewController: UIViewController {
         gridWidth.constant = width
         gridHeight.constant = height
         
+        gridCollectionViewLayout.itemSize = CGSize(width: pixelWidth, height: pixelWidth)
+        
         view.setNeedsLayout()
         view.layoutIfNeeded()
         gridCollectionView.reloadData()
@@ -129,11 +131,13 @@ class PixGridMainViewController: UIViewController {
     }
     
     @IBAction func zoomInTap(_ sender: Any) {
-        
+        pixelWidth += 5
+        updateCollectionViewSize()
     }
     
     @IBAction func zoomOutTap(_ sender: Any) {
-        
+        pixelWidth -= 5
+        updateCollectionViewSize()
     }
     
     @IBAction func clearTap(_ sender: Any) {
