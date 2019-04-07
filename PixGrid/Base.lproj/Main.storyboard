@@ -21,11 +21,18 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k19-9L-9YD">
                                 <rect key="frame" x="0.0" y="0.0" width="50" height="375"/>
                                 <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vzs-n3-MwH">
+                                        <rect key="frame" x="49.5" y="0.0" width="0.5" height="375"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="0.5" id="ddY-2j-7um"/>
+                                        </constraints>
+                                    </view>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v61-MD-jsc">
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="375"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="2ag-0b-PM5">
-                                                <rect key="frame" x="0.0" y="0.0" width="50" height="250"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="50" height="300"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dkr-7B-ZJY">
                                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
@@ -38,6 +45,9 @@
                                                             </label>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RpK-LO-5Az">
                                                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                                <connections>
+                                                                    <action selector="penTool:" destination="BYZ-38-t0r" eventType="touchUpInside" id="b4x-91-tdr"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -62,6 +72,9 @@
                                                             </label>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UVQ-Lm-SI3">
                                                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                                <connections>
+                                                                    <action selector="increaseGridSizeTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="FmS-ne-M81"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -86,6 +99,9 @@
                                                             </label>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kfq-JY-fS9">
                                                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                                <connections>
+                                                                    <action selector="decreaseGridSizeTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aVj-8N-9XN"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -110,6 +126,9 @@
                                                             </label>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pgb-B9-hT4">
                                                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                                <connections>
+                                                                    <action selector="zoomInTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="YOZ-ml-4N2"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -134,6 +153,9 @@
                                                             </label>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0u1-t8-mFe">
                                                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                                <connections>
+                                                                    <action selector="zoomOutTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="VQ2-2m-mfq"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -147,8 +169,37 @@
                                                             <constraint firstItem="NGK-N8-uy6" firstAttribute="centerX" secondItem="U3U-Ih-eej" secondAttribute="centerX" id="pUY-PQ-yFU"/>
                                                         </constraints>
                                                     </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G7K-0I-bpf">
+                                                        <rect key="frame" x="0.0" y="250" width="50" height="50"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="clear" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yvV-bE-R4T">
+                                                                <rect key="frame" x="6.5" y="15" width="37.5" height="20.5"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cvl-PP-qTj">
+                                                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                                <connections>
+                                                                    <action selector="clearTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jkk-69-q72"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" secondItem="G7K-0I-bpf" secondAttribute="height" multiplier="1:1" id="3Bg-NU-5aw"/>
+                                                            <constraint firstItem="cvl-PP-qTj" firstAttribute="top" secondItem="G7K-0I-bpf" secondAttribute="top" id="5Ow-hh-kKT"/>
+                                                            <constraint firstAttribute="trailing" secondItem="cvl-PP-qTj" secondAttribute="trailing" id="8FH-Mf-bc8"/>
+                                                            <constraint firstItem="yvV-bE-R4T" firstAttribute="centerX" secondItem="G7K-0I-bpf" secondAttribute="centerX" id="AEG-vn-hGC"/>
+                                                            <constraint firstItem="yvV-bE-R4T" firstAttribute="centerY" secondItem="G7K-0I-bpf" secondAttribute="centerY" id="Q3Y-c5-Xhx"/>
+                                                            <constraint firstItem="cvl-PP-qTj" firstAttribute="leading" secondItem="G7K-0I-bpf" secondAttribute="leading" id="nRd-KU-hvp"/>
+                                                            <constraint firstAttribute="bottom" secondItem="cvl-PP-qTj" secondAttribute="bottom" id="oqe-kl-FQs"/>
+                                                        </constraints>
+                                                    </view>
                                                 </subviews>
                                                 <constraints>
+                                                    <constraint firstItem="G7K-0I-bpf" firstAttribute="width" secondItem="G7K-0I-bpf" secondAttribute="height" multiplier="1:1" id="5iK-BK-FSO"/>
+                                                    <constraint firstItem="G7K-0I-bpf" firstAttribute="width" secondItem="G7K-0I-bpf" secondAttribute="height" multiplier="1:1" id="O4v-05-buQ"/>
                                                     <constraint firstItem="U3U-Ih-eej" firstAttribute="width" secondItem="U3U-Ih-eej" secondAttribute="height" multiplier="1:1" id="WbI-u0-3S1"/>
                                                     <constraint firstItem="Ash-9p-VjG" firstAttribute="width" secondItem="Ash-9p-VjG" secondAttribute="height" multiplier="1:1" id="htA-YQ-qHA"/>
                                                     <constraint firstItem="Nj2-CQ-Spc" firstAttribute="width" secondItem="Nj2-CQ-Spc" secondAttribute="height" multiplier="1:1" id="krz-Ah-bhx"/>
@@ -166,9 +217,12 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.93999999999999995" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="Vzs-n3-MwH" secondAttribute="bottom" id="0ym-TU-azZ"/>
                                     <constraint firstItem="v61-MD-jsc" firstAttribute="top" secondItem="k19-9L-9YD" secondAttribute="top" id="EsP-lT-lDA"/>
                                     <constraint firstItem="v61-MD-jsc" firstAttribute="leading" secondItem="k19-9L-9YD" secondAttribute="leading" id="G2Y-OO-y2I"/>
                                     <constraint firstAttribute="trailing" secondItem="v61-MD-jsc" secondAttribute="trailing" id="O6b-BR-BXp"/>
+                                    <constraint firstItem="Vzs-n3-MwH" firstAttribute="top" secondItem="k19-9L-9YD" secondAttribute="top" id="X6q-bF-wCa"/>
+                                    <constraint firstAttribute="trailing" secondItem="Vzs-n3-MwH" secondAttribute="trailing" id="YSZ-6E-Hzd"/>
                                     <constraint firstItem="2ag-0b-PM5" firstAttribute="width" secondItem="k19-9L-9YD" secondAttribute="width" id="mCj-bq-7EH"/>
                                     <constraint firstAttribute="width" constant="50" id="opV-W5-ycE"/>
                                     <constraint firstAttribute="bottom" secondItem="v61-MD-jsc" secondAttribute="bottom" id="qAR-sU-Ri6"/>
@@ -196,6 +250,7 @@
                                                 <cells/>
                                             </collectionView>
                                         </subviews>
+                                        <color key="backgroundColor" white="0.93999999999999995" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="vUL-qX-353" secondAttribute="trailing" constant="158.5" id="99C-Cf-xO9"/>
                                             <constraint firstItem="vUL-qX-353" firstAttribute="leading" secondItem="n5h-IL-10v" secondAttribute="leading" constant="158.5" id="Bz8-3B-K0J"/>
@@ -233,6 +288,7 @@
                         <outlet property="gridCollectionViewLayout" destination="SdV-J6-D2G" id="7gt-s9-qv8"/>
                         <outlet property="gridHeight" destination="hE7-es-Odf" id="GPU-eS-yKs"/>
                         <outlet property="gridLeading" destination="Bz8-3B-K0J" id="jch-uS-nMW"/>
+                        <outlet property="gridScrollView" destination="n5h-IL-10v" id="qKD-2T-3n2"/>
                         <outlet property="gridTop" destination="fOx-6z-v7r" id="rgk-Dt-g1E"/>
                         <outlet property="gridTrailing" destination="99C-Cf-xO9" id="sNa-iK-MW1"/>
                         <outlet property="gridWidth" destination="APj-2F-f5j" id="j4n-cI-q7u"/>

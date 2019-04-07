@@ -11,6 +11,7 @@ import UIKit
 class PixGridMainViewController: UIViewController {
     @IBOutlet weak var toolBarWidth: NSLayoutConstraint!
     
+    @IBOutlet weak var gridScrollView: UIScrollView!
     @IBOutlet weak var gridCollectionView: UICollectionView!
     @IBOutlet weak var gridCollectionViewLayout: UICollectionViewFlowLayout!
     @IBOutlet weak var gridWidth: NSLayoutConstraint!
@@ -20,14 +21,15 @@ class PixGridMainViewController: UIViewController {
     @IBOutlet weak var gridTop: NSLayoutConstraint!
     @IBOutlet weak var gridBottom: NSLayoutConstraint!
     
-    var gridPixelHorizontalCount: UInt!
-    var gridPixelVerticalCount: UInt!
-    var pixelWidth: UInt!
+    var gridPixelHorizontalCount: CGFloat!
+    var gridPixelVerticalCount: CGFloat!
+    var pixelWidth: CGFloat!
+    var pixelSpacing: CGFloat!
     
     var pixelColor = [IndexPath: UIColor]()
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return .landscapeLeft
+        return .landscapeRight
     }
 
     override func viewDidLoad() {
@@ -36,21 +38,55 @@ class PixGridMainViewController: UIViewController {
         gridPixelHorizontalCount = 10
         gridPixelVerticalCount = 6
         pixelWidth = 30
-        
+        pixelSpacing = 0.5
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
         initCollectionView()
+        updateCollectionViewSize()
     }
 
     private func initCollectionView() {
         gridCollectionViewLayout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        gridCollectionViewLayout.minimumLineSpacing = 0
+        gridCollectionViewLayout.itemSize = CGSize(width: pixelWidth, height: pixelWidth)
+        gridCollectionViewLayout.minimumInteritemSpacing = 0
+        gridCollectionViewLayout.minimumLineSpacing = pixelSpacing
         
         let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(longPress))
         longPressGestureRecognizer.minimumPressDuration = 0.01
+        longPressGestureRecognizer.cancelsTouchesInView = false
         gridCollectionView.addGestureRecognizer(longPressGestureRecognizer)
         
-        gridCollectionView.register(UINib(nibName: "UICollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CommonCell")
+        gridCollectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "CommonCell")
         gridCollectionView.delegate = self
         gridCollectionView.dataSource = self
+        gridCollectionView.isScrollEnabled = false
+    }
+    
+    private func updateCollectionViewSize() {
+        let width = (gridPixelHorizontalCount * pixelWidth) + ((gridPixelHorizontalCount - 1) * pixelSpacing)
+        let height = (gridPixelVerticalCount * pixelWidth) + ((gridPixelVerticalCount - 1) * pixelSpacing)
+        
+        let horizontalSpacing = max(pixelWidth, (gridScrollView.frame.size.width - width) / 2)
+        let verticalSpacing = max(pixelWidth, (gridScrollView.frame.size.height - height) / 2)
+        gridLeading.constant = horizontalSpacing
+        gridTrailing.constant = horizontalSpacing
+        gridTop.constant = verticalSpacing
+        gridBottom.constant = verticalSpacing
+        
+        gridWidth.constant = width
+        gridHeight.constant = height
+        
+        view.setNeedsLayout()
+        view.layoutIfNeeded()
+        gridCollectionView.reloadData()
+    }
+    
+    private func paintPixelAt(_ indexPath: IndexPath, with color: UIColor) {
+        pixelColor[indexPath] = color
+        if let cell = gridCollectionView.cellForItem(at: indexPath) {
+            cell.contentView.backgroundColor = color
+        }
     }
     
     @objc func longPress(gestureRecognizer: UILongPressGestureRecognizer) {
@@ -58,11 +94,15 @@ class PixGridMainViewController: UIViewController {
         case .possible:
             return
         case .began:
-//            voiceNoteLongPressStartingPoint = gestureRecognizer.location(in: view)
-            break
+            let tapLocation = gestureRecognizer.location(in: gridCollectionView)
+            if let indexPath = gridCollectionView.indexPathForItem(at: tapLocation) {
+                paintPixelAt(indexPath, with: UIColor.black)
+            }
         case .changed:
-//            let point = gestureRecognizer.location(in: view)
-            break
+            let tapLocation = gestureRecognizer.location(in: gridCollectionView)
+            if let indexPath = gridCollectionView.indexPathForItem(at: tapLocation) {
+                paintPixelAt(indexPath, with: UIColor.black)
+            }
         case .failed:
             fallthrough
         case .cancelled:
@@ -70,6 +110,35 @@ class PixGridMainViewController: UIViewController {
         case .ended:
             break
         }
+    }
+    
+    @IBAction func penTool(_ sender: Any) {
+        
+    }
+    
+    @IBAction func increaseGridSizeTap(_ sender: Any) {
+        gridPixelHorizontalCount += 1
+        gridPixelVerticalCount += 1
+        updateCollectionViewSize()
+    }
+    
+    @IBAction func decreaseGridSizeTap(_ sender: Any) {
+        gridPixelHorizontalCount -= 1
+        gridPixelVerticalCount -= 1
+        updateCollectionViewSize()
+    }
+    
+    @IBAction func zoomInTap(_ sender: Any) {
+        
+    }
+    
+    @IBAction func zoomOutTap(_ sender: Any) {
+        
+    }
+    
+    @IBAction func clearTap(_ sender: Any) {
+        pixelColor = [IndexPath: UIColor]()
+        gridCollectionView.reloadData()
     }
 }
 
@@ -87,5 +156,11 @@ extension PixGridMainViewController: UICollectionViewDelegate, UICollectionViewD
         cell.contentView.backgroundColor = pixelColor[indexPath] ?? UIColor.white
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        paintPixelAt(indexPath, with: UIColor.black)
+    }
 }
+
+
 
