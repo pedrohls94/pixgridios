@@ -13,6 +13,9 @@
 		8C0A2735225984C100F02B70 /* PixGrid.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8C0A2733225984C100F02B70 /* PixGrid.xcdatamodeld */; };
 		8C0A2737225984C200F02B70 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C0A2736225984C200F02B70 /* Assets.xcassets */; };
 		8C0A273A225984C200F02B70 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C0A2738225984C200F02B70 /* LaunchScreen.storyboard */; };
+		8CC5E77B225C230300D4D72A /* ColorPickerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC5E779225C230300D4D72A /* ColorPickerCollectionViewCell.swift */; };
+		8CC5E77C225C230300D4D72A /* ColorPickerCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CC5E77A225C230300D4D72A /* ColorPickerCollectionViewCell.xib */; };
+		8CC5E77E225C241200D4D72A /* ColorPickerCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC5E77D225C241200D4D72A /* ColorPickerCollectionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +27,9 @@
 		8C0A2736225984C200F02B70 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8C0A2739225984C200F02B70 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8C0A273B225984C200F02B70 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8CC5E779225C230300D4D72A /* ColorPickerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerCollectionViewCell.swift; sourceTree = "<group>"; };
+		8CC5E77A225C230300D4D72A /* ColorPickerCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ColorPickerCollectionViewCell.xib; sourceTree = "<group>"; };
+		8CC5E77D225C241200D4D72A /* ColorPickerCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerCollectionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +69,9 @@
 				8C0A2738225984C200F02B70 /* LaunchScreen.storyboard */,
 				8C0A273B225984C200F02B70 /* Info.plist */,
 				8C0A2733225984C100F02B70 /* PixGrid.xcdatamodeld */,
+				8CC5E77D225C241200D4D72A /* ColorPickerCollectionView.swift */,
+				8CC5E779225C230300D4D72A /* ColorPickerCollectionViewCell.swift */,
+				8CC5E77A225C230300D4D72A /* ColorPickerCollectionViewCell.xib */,
 			);
 			path = PixGrid;
 			sourceTree = "<group>";
@@ -127,6 +136,7 @@
 			files = (
 				8C0A273A225984C200F02B70 /* LaunchScreen.storyboard in Resources */,
 				8C0A2737225984C200F02B70 /* Assets.xcassets in Resources */,
+				8CC5E77C225C230300D4D72A /* ColorPickerCollectionViewCell.xib in Resources */,
 				8C0A2732225984C100F02B70 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -139,7 +149,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				8C0A2735225984C100F02B70 /* PixGrid.xcdatamodeld in Sources */,
+				8CC5E77E225C241200D4D72A /* ColorPickerCollectionView.swift in Sources */,
 				8C0A272F225984C100F02B70 /* PixGridMainViewController.swift in Sources */,
+				8CC5E77B225C230300D4D72A /* ColorPickerCollectionViewCell.swift in Sources */,
 				8C0A272D225984C100F02B70 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

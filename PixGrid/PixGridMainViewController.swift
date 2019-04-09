@@ -8,8 +8,17 @@
 
 import UIKit
 
+enum Tool {
+    case pen
+    case eraser
+}
+
 class PixGridMainViewController: UIViewController {
     @IBOutlet weak var toolBarWidth: NSLayoutConstraint!
+    @IBOutlet weak var colorBarWidth: NSLayoutConstraint!
+    @IBOutlet weak var colorBarTrailing: NSLayoutConstraint!
+    @IBOutlet weak var colorPickerCollectionView: ColorPickerCollectionView!
+    @IBOutlet weak var colorPickerCollectionViewLayout: UICollectionViewFlowLayout!
     
     @IBOutlet weak var gridScrollView: UIScrollView!
     @IBOutlet weak var gridCollectionView: UICollectionView!
@@ -25,8 +34,11 @@ class PixGridMainViewController: UIViewController {
     var gridPixelVerticalCount: CGFloat!
     var pixelWidth: CGFloat!
     var pixelSpacing: CGFloat!
-    
     var pixelColor = [IndexPath: UIColor]()
+    
+    var backgroundColor = UIColor.white
+    var selectedColor = UIColor.black
+    var selectedTool: Tool = .pen
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return .landscapeRight
@@ -44,6 +56,7 @@ class PixGridMainViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         initCollectionView()
         updateCollectionViewSize()
+        colorPickerCollectionView.prepare(with: colorPickerCollectionViewLayout, and: self)
     }
 
     private func initCollectionView() {
@@ -84,10 +97,23 @@ class PixGridMainViewController: UIViewController {
         gridCollectionView.reloadData()
     }
     
-    private func paintPixelAt(_ indexPath: IndexPath, with color: UIColor) {
-        pixelColor[indexPath] = color
+    private func paintPixelAt(_ indexPath: IndexPath) {
+        switch selectedTool {
+        case .pen:
+            pixelColor[indexPath] = selectedColor
+        case .eraser:
+            pixelColor[indexPath] = backgroundColor
+        }
+        
         if let cell = gridCollectionView.cellForItem(at: indexPath) {
-            cell.contentView.backgroundColor = color
+            cell.contentView.backgroundColor = pixelColor[indexPath] ?? backgroundColor
+        }
+    }
+    
+    private func toggleColorBar() {
+        UIView.animate(withDuration: 0.3) {
+            self.colorBarTrailing.constant = self.colorBarTrailing.constant == 0 ? 40 : 0
+            self.view.layoutIfNeeded()
         }
     }
     
@@ -98,12 +124,12 @@ class PixGridMainViewController: UIViewController {
         case .began:
             let tapLocation = gestureRecognizer.location(in: gridCollectionView)
             if let indexPath = gridCollectionView.indexPathForItem(at: tapLocation) {
-                paintPixelAt(indexPath, with: UIColor.black)
+                paintPixelAt(indexPath)
             }
         case .changed:
             let tapLocation = gestureRecognizer.location(in: gridCollectionView)
             if let indexPath = gridCollectionView.indexPathForItem(at: tapLocation) {
-                paintPixelAt(indexPath, with: UIColor.black)
+                paintPixelAt(indexPath)
             }
         case .failed:
             fallthrough
@@ -114,8 +140,15 @@ class PixGridMainViewController: UIViewController {
         }
     }
     
+    //MARK: - IBAction taps
+    
     @IBAction func penTool(_ sender: Any) {
-        
+        selectedTool = .pen
+        toggleColorBar()
+    }
+    
+    @IBAction func eraserTap(_ sender: Any) {
+        selectedTool = .eraser
     }
     
     @IBAction func increaseGridSizeTap(_ sender: Any) {
@@ -157,14 +190,20 @@ extension PixGridMainViewController: UICollectionViewDelegate, UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CommonCell", for: indexPath)
-        cell.contentView.backgroundColor = pixelColor[indexPath] ?? UIColor.white
+        cell.contentView.backgroundColor = pixelColor[indexPath] ?? backgroundColor
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        paintPixelAt(indexPath, with: UIColor.black)
+        paintPixelAt(indexPath)
     }
 }
 
+extension PixGridMainViewController: ColorPickerDelegate {
+    func didPickColor(_ color: UIColor) {
+        selectedColor = color
+        toggleColorBar()
+    }
+}
 
 
