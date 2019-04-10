@@ -60,7 +60,7 @@ class PixGridMainViewController: UIViewController {
     }
 
     private func initCollectionView() {
-        gridCollectionViewLayout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        gridCollectionViewLayout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: pixelSpacing, right: 0)
         gridCollectionViewLayout.itemSize = CGSize(width: pixelWidth, height: pixelWidth)
         gridCollectionViewLayout.minimumInteritemSpacing = 0
         gridCollectionViewLayout.minimumLineSpacing = pixelSpacing
@@ -181,11 +181,11 @@ class PixGridMainViewController: UIViewController {
 
 extension PixGridMainViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
+        return Int(gridPixelVerticalCount)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return Int(gridPixelVerticalCount * gridPixelHorizontalCount)
+        return Int(gridPixelHorizontalCount)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
